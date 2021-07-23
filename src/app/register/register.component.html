@@ -1,0 +1,27 @@
+<div class="col mt-5" style="background-color: burlywood;border: 2px solid black; ">
+    <h3 style="text-align: center;">Register</h3>
+<form (ngSubmit)="register()">
+    <div class="mb-3" >
+        <label for="exampleInputPassword1">Account Number</label>
+        <input type="text" class="form-control" id="acnt" name="acno" [(ngModel)]="accno" placeholder="Account no"
+            aria-label="recipient username" aria-describedby="basic-addon2">
+
+    </div>
+    <div class="mb-3" >
+        <label for="exampleInputPassword1">Username</label>
+        <input type="text" class="form-control" id="uname" name="uname" [(ngModel)]="uname" placeholder="User name"
+            aria-label="recipient username" aria-describedby="basic-addon2">
+
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword1" >Password</label>
+        <input type="password" class="form-control" id="pswd" name="pwd" [(ngModel)]="pswd" placeholder="password"
+        aria-label="recipient username" aria-describedby="basic-addon2">
+    </div>
+    <div class="mb-3">
+    <button type="submit" class="btn btn-primary ml-2" >Register</button>
+    </div>
+</form>
+    
+</div>
+<div class="col"></div>

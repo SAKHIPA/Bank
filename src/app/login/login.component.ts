@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,8 +9,8 @@ import { Component, OnInit } from '@angular/core';
 export class LoginComponent implements OnInit {
 
   bank="Welcome to SBL Bank"
-  acno="Please enter account no"
-  accno=""
+
+  accno="Please enter account no"
   pswd=""
 
   users:any={
@@ -20,25 +21,27 @@ export class LoginComponent implements OnInit {
   }
   
 
-  constructor() { }
+  constructor(private router :Router) { }
 
   ngOnInit(): void {
   }
-  accNumber(event:any){
-    this.accno=event.target.value
-  }
-  pwdChange(event:any){
-    this.pswd=event.target.value
+  // accNumber(event:any){
+  //   this.accno=event.target.value
+  // }
+  // pwdChange(event:any){
+  //   this.pswd=event.target.value
 
-  }
+  // }
   login(){
-    var accno=this.accno;
+    var accno=this.accno
     var pswd=this.pswd
     let accDetails=this.users
 
     if(accno in accDetails){
       if(pswd==accDetails[accno]["pw"]){
         alert("login success")
+        this.router.navigateByUrl("dashboard")
+
       }
       else{
         alert("invalid password")
@@ -49,5 +52,23 @@ export class LoginComponent implements OnInit {
     }
 
   }
+  // login(){
+  //   var accno=this.accno;
+  //   var pswd=this.pswd
+  //   let accDetails=this.users
+
+  //   if(accno in accDetails){
+  //     if(pswd==accDetails[accno]["pw"]){
+  //       alert("login success")
+  //     }
+  //     else{
+  //       alert("invalid password")
+  //     }
+
+  //   }else{
+  //     alert("invalid account")
+  //   }
+
+  // }
 
 }

@@ -4,21 +4,28 @@
         <h1>{{bank}}</h1>
         <div class="col mt-5" style="background-color: burlywood;border: 2px solid black; ">
             <h3 style="text-align: center;">Login</h3>
+            <form (ngSubmit)="login()">
 
-            <div class="mb-5" >
-                <label for="exampleInputPassword1">Username</label>
-                <input type="text" class="form-control" id="uname" (change)="accNumber($event)" [value]="acno" placeholder="username"
-                    aria-label="recipient username" aria-describedby="basic-addon2">
 
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputPassword1" >Password</label>
-                <input type="password" class="form-control" id="pwd" (change)="pwdChange($event)" placeholder="password"
-                aria-label="recipient username" aria-describedby="basic-addon2">
-            </div>
-            <div class="mb-3">
-            <button class="btn btn-primary ml-2" (click)="login()" >Login</button>
-            </div>
+
+                <div class="mb-5">
+                    <label for="exampleInputPassword1">Username</label>
+                    <input type="text" class="form-control" id="acnt" name="accno" [(ngModel)]="accno" placeholder="Account no"
+                        aria-label="recipient username" aria-describedby="basic-addon2">
+
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" class="form-control" id="pswd" name="pswd" [(ngModel)]="pswd" placeholder="password"
+                        aria-label="recipient username" aria-describedby="basic-addon2">
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary ml-2">Login</button>
+                </div>
+                <a routerLink="register">Sign Up</a>
+            </form>
+
+
         </div>
         <div class="col"></div>
 
