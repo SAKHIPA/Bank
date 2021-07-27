@@ -1,1 +1,56 @@
-<p>dashboard works!</p>
+<div class="col mt-5 container" style="background-color: burlywood;border: 2px solid black; ">
+    <h3 style="text-align: center;">Deposit Form</h3>
+<form (ngSubmit)="deposit()">
+    <div class="mb-3" >
+        <label for="exampleInputPassword1">Account Number</label>
+        <input type="text" class="form-control" id="acnt" name="acno" [(ngModel)]="accno" placeholder="Account no"
+            aria-label="recipient username" aria-describedby="basic-addon2">
+            <div class="mb-3">
+                <label for="exampleInputPassword1" >Password</label>
+                <input type="password" class="form-control" id="pswd" name="pwd" [(ngModel)]="pswd" placeholder="password"
+                aria-label="recipient username" aria-describedby="basic-addon2">
+            </div>
+
+    </div>
+    <div class="mb-3" >
+        <label for="exampleInputPassword1">Amount</label>
+        <input type="text" class="form-control" id="uname" name="amt" [(ngModel)]="amt" placeholder="Amount"
+            aria-label="recipient username" aria-describedby="basic-addon2">
+
+    </div>
+   
+    <div class="mb-3">
+    <button type="submit" class="btn btn-primary ml-2" >Deposit</button>
+    </div>
+</form>
+    
+</div>
+<div class="col"></div>
+<div class="col mt-5 container" style="background-color: burlywood;border: 2px solid black; ">
+    <h3 style="text-align: center;">Withdraw Form</h3>
+<form (ngSubmit)="withdraw()">
+    <div class="mb-3" >
+        <label for="exampleInputPassword1">Account Number</label>
+        <input type="text" class="form-control" id="acnt" name="acno" [(ngModel)]="accno1" placeholder="Account no"
+            aria-label="recipient username" aria-describedby="basic-addon2">
+            <div class="mb-3">
+                <label for="exampleInputPassword1" >Password</label>
+                <input type="password" class="form-control" id="pswd" name="pwd" [(ngModel)]="pswd1" placeholder="password"
+                aria-label="recipient username" aria-describedby="basic-addon2">
+            </div>
+
+    </div>
+    <div class="mb-3" >
+        <label for="exampleInputPassword1">Amount</label>
+        <input type="text" class="form-control" id="uname" name="amt" [(ngModel)]="amt1" placeholder="Amount"
+            aria-label="recipient username" aria-describedby="basic-addon2">
+
+    </div>
+   
+    <div class="mb-3">
+    <button type="submit" class="btn btn-primary ml-2" >Withdraw</button>
+    </div>
+</form>
+    
+</div>
+<div class="col"></div>
