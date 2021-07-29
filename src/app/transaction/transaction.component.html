@@ -9,12 +9,12 @@
                 Type
             </th>
         </tr>
-        <tr>
-        <td>
-            1000
+        <tr *ngFor="let transaction of transaction">
+        <td>{{transaction.amount}}
+            
         </td>
         <td>
-            credit
+            {{transaction.type}}
         </td>
         </tr>
     </thead>

@@ -4,7 +4,11 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class DataService {
+
+
   currentUser=""
+  currentAcc=""
+
   users: any = {
     1000: { accno: 1000, uname: "sakhi", pw: 1000, balance: 5000, transaction:[] },
     1001: { accno: 1001, uname: "sali", pw: 1001, balance: 2000, transaction:[] },
@@ -26,6 +30,10 @@ export class DataService {
 
     localStorage.setItem("currentUser",JSON.stringify(this.currentUser))
     }
+    if(this.currentAcc){
+
+      localStorage.setItem("currentAcc",JSON.stringify(this.currentAcc))
+      }
   }
   getDetails(){
     if(localStorage.getItem("users")){
@@ -35,11 +43,17 @@ export class DataService {
       if(localStorage.getItem("currentUser")){
       this.currentUser=JSON.parse(localStorage.getItem("currentUser") ||'')
     }
+    if(localStorage.getItem("currentAcc")){
+      this.currentAcc=JSON.parse(localStorage.getItem("currentAcc") ||'')
+    }
   }
 
 
   getTransaction(){
+  
     
+    return this.users[this.currentAcc].transaction
+
   }
 
 
@@ -69,10 +83,12 @@ export class DataService {
   login(accno: any, pswd: any) {
     let accDetails = this.users
 
+
     if (accno in accDetails) {
       if (pswd == accDetails[accno]["pw"]) {
 
         this.currentUser=accDetails[accno]["uname"]
+        this.currentAcc=accno
 
         this.saveDetails()
         return true
@@ -103,6 +119,11 @@ export class DataService {
       if(pw==accDetails[accno]["pw"]){
         accDetails[accno]["balance"]+=amt
 
+        accDetails[accno].transaction.push({
+          amount:amt,
+          type:"CREDIT"
+        })
+
         this.saveDetails()
         return accDetails[accno]["balance"]
       }
@@ -127,6 +148,11 @@ export class DataService {
       if(pw==accDetails[accno]["pw"]){
         if(accDetails[accno]["balance"]>amt){
         accDetails[accno]["balance"]-=amt
+
+        accDetails[accno].transaction.push({
+          amount:amt,
+          type:"DEBIT"
+        })
 
         this.saveDetails()
         return accDetails[accno]["balance"]
