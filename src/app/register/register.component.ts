@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../service/data.service';
 import { Router } from '@angular/router';
+import { FormBuilder } from '@angular/forms';
 
 
 @Component({
@@ -10,18 +11,25 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
-  accno=""
-  pswd=""
-  uname=""
+  // accno=""
+  // pswd=""
+  // uname=""
 
-  constructor(private ds:DataService,private router:Router) { }
+  registerForm=this.fb.group({
+    uname:[''],
+    accno:[''],
+    pw:['']
+
+  })
+
+  constructor(private ds:DataService,private router:Router,private fb:FormBuilder) { }
 
   ngOnInit(): void {
   }
 register(){
-  var accno=this.accno
-  var pswd=this.pswd
-  var uname=this.uname
+  var accno=this.registerForm.value.accno
+  var pswd=this.registerForm.value.pswd
+  var uname=this.registerForm.value.uname
 
  var result= this.ds.register(accno,uname,pswd)
 

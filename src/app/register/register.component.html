@@ -1,21 +1,21 @@
 <div class="col mt-5 container" style="background-color: burlywood;border: 2px solid black; ">
     <h3 style="text-align: center;">Register</h3>
-<form (ngSubmit)="register()">
+<form [formGroup]="registerForm" (ngSubmit)="register()">
     <div class="mb-3" >
         <label for="exampleInputPassword1">Account Number</label>
-        <input type="text" class="form-control" id="acnt" name="acno" [(ngModel)]="accno" placeholder="Account no"
+        <input type="text" class="form-control" id="acnt" name="acno"formControlName="accno" placeholder="Account no"
             aria-label="recipient username" aria-describedby="basic-addon2">
 
     </div>
     <div class="mb-3" >
         <label for="exampleInputPassword1">Username</label>
-        <input type="text" class="form-control" id="uname" name="uname" [(ngModel)]="uname" placeholder="User name"
+        <input type="text" class="form-control" id="uname" name="uname" formControlName="uname" placeholder="User name"
             aria-label="recipient username" aria-describedby="basic-addon2">
 
     </div>
     <div class="mb-3">
         <label for="exampleInputPassword1" >Password</label>
-        <input type="password" class="form-control" id="pswd" name="pwd" [(ngModel)]="pswd" placeholder="password"
+        <input type="password" class="form-control" id="pswd" name="pwd" formControlName="pw" placeholder="password"
         aria-label="recipient username" aria-describedby="basic-addon2">
     </div>
     <div class="mb-3">
