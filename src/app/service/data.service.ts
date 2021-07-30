@@ -20,7 +20,7 @@ export class DataService {
 
 
   constructor() {
-    this.getDetails()
+    //this.getDetails()
    }
 
 
