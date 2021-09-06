@@ -28,25 +28,52 @@ export class RegisterComponent implements OnInit {
   }
   register() {
 
-   
+
     if (this.registerForm.valid) {
       var accno = this.registerForm.value.accno
-      var pswd = this.registerForm.value.pswd
+      var pw = this.registerForm.value.pw
       var uname = this.registerForm.value.uname
+    this.ds.register(accno, uname, pw)
+        .subscribe((result:any) => {
+          if (result) {
+            alert(result.message)
+            this.router.navigateByUrl("")
+          }
+        },
+          (result) => {
+            alert(result.error.message)
 
-      var result = this.ds.register(accno, uname, pswd)
+            this.router.navigateByUrl("")
 
-      if (result) {
-        alert("successfully registered")
-        this.router.navigateByUrl("")
-      }
-      else {
-        alert("already exist..please log in")
-        this.router.navigateByUrl("")
-      }
+          })
     }
+
     else {
       alert("invalid form")
     }
+
+
+
+
+
   }
 }
+
+
+
+//       var result = this.ds.register(accno, uname, pw)
+
+//       if (result) {
+//         alert("successfully registered")
+//         this.router.navigateByUrl("")
+//       }
+//       else {
+//         alert("already exist..please log in")
+//         this.router.navigateByUrl("")
+//       }
+//     }
+//     else {
+//       alert("invalid form")
+//     }
+//    }
+// }

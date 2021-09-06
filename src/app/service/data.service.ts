@@ -1,8 +1,14 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
+const options={
+  withCredentials:true
+}
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class DataService {
 
 
@@ -19,7 +25,7 @@ export class DataService {
 
 
 
-  constructor() {
+  constructor(private http:HttpClient) {
     //this.getDetails()
    }
 
@@ -49,126 +55,177 @@ export class DataService {
   }
 
 
-  getTransaction(){
+  getTransaction(accno:any){
+    const data={
+      accno
+    }
   
-    
-    return this.users[this.currentAcc].transaction
+    return this.http.post("http://localhost:3000/getTransaction",data,options)
+
+   // return this.users[this.currentAcc].transaction
 
   }
 
 
   register(accno: any, uname: any, pw: any) {
-
-    let accDetails = this.users
-
-    if (accno in accDetails) {
-
-
-      return false
+    const data={
+      accno,
+      uname,
+      pw
     }
-    else {
-      accDetails[accno] = {
-        accno,
-        uname,
-        pw,
-        balance: 0
-      }
-      console.log(accDetails);
-
-      this.saveDetails()
-      return true
-    }
+    return this.http.post("http://localhost:3000/register",data)
 
   }
-  login(accno: any, pswd: any) {
-    let accDetails = this.users
+
+  //   let accDetails = this.users
+
+  //   if (accno in accDetails) {
 
 
-    if (accno in accDetails) {
-      if (pswd == accDetails[accno]["pw"]) {
+  //     return false
+  //   }
+  //   else {
+  //     accDetails[accno] = {
+  //       accno,
+  //       uname,
+  //       pw,
+  //       balance: 0
+  //     }
+  //     console.log(accDetails);
 
-        this.currentUser=accDetails[accno]["uname"]
-        this.currentAcc=accno
+  //     this.saveDetails()
+  //     return true
+  //   }
 
-        this.saveDetails()
-        return true
+  // }
+  login(accno: any, pw: any) {
 
-      }
-      else {
-        alert("invalid password")
-        return false
+    const data={
+      accno,
+      pw
+    }
+    return this.http.post("http://localhost:3000/login",data,options)
 
-      }
+
+  }
+
+
+  //   let accDetails = this.users
+
+
+  //   if (accno in accDetails) {
+  //     if (pswd == accDetails[accno]["pw"]) {
+
+  //       this.currentUser=accDetails[accno]["uname"]
+  //       this.currentAcc=accno
+
+  //       this.saveDetails()
+  //       return true
+
+  //     }
+  //     else {
+  //       alert("invalid password")
+  //       return false
+
+  //     }
       
-    }
-    else {
-      alert("invalid account")
-      return false
-    }
+  //   }
+  //   else {
+  //     alert("invalid account")
+  //     return false
+  //   }
 
 
 
 
-  }
+  // }
   deposit(accno:any,pw:any,amount:any){
-    let accDetails=this.users
 
-    var amt=parseInt(amount)
-
-    if(accno in accDetails){
-      if(pw==accDetails[accno]["pw"]){
-        accDetails[accno]["balance"]+=amt
-
-        accDetails[accno].transaction.push({
-          amount:amt,
-          type:"CREDIT"
-        })
-
-        this.saveDetails()
-        return accDetails[accno]["balance"]
-      }
-      else{
-        alert("invalid pw")
-        return false
-      }
-
+    const data={
+      accno,
+      pw,
+      amount
     }
-    else{
-      alert("invalid accno")
-      return false
-    }
+    return this.http.post("http://localhost:3000/deposit",data,options)
+
+
   }
+
+  //   let accDetails=this.users
+
+  //   var amt=parseInt(amount)
+
+  //   if(accno in accDetails){
+  //     if(pw==accDetails[accno]["pw"]){
+  //       accDetails[accno]["balance"]+=amt
+
+  //       accDetails[accno].transaction.push({
+  //         amount:amt,
+  //         type:"CREDIT"
+  //       })
+
+  //       this.saveDetails()
+  //       return accDetails[accno]["balance"]
+  //     }
+  //     else{
+  //       alert("invalid pw")
+  //       return false
+  //     }
+
+  //   }
+  //   else{
+  //     alert("invalid accno")
+  //     return false
+  //   }
+  // }
 
   withdraw(accno:any,pw:any,amount:any){
-    let accDetails=this.users
 
-    var amt=parseInt(amount)
 
-    if(accno in accDetails){
-      if(pw==accDetails[accno]["pw"]){
-        if(accDetails[accno]["balance"]>amt){
-        accDetails[accno]["balance"]-=amt
 
-        accDetails[accno].transaction.push({
-          amount:amt,
-          type:"DEBIT"
-        })
-
-        this.saveDetails()
-        return accDetails[accno]["balance"]
-        }else{
-          alert("Insufficient balance")
-        }
-      }
-      else{
-        alert("invalid pw")
-        return false
-      }
-
+    const data={
+      accno,
+      pw,
+      amount
     }
-    else{
-      alert("invalid accno")
-      return false
-    }
+    return this.http.post("http://localhost:3000/withdraw",data,options)
+
+
   }
+
+
+  //   let accDetails=this.users
+
+  //   var amt=parseInt(amount)
+
+  //   if(accno in accDetails){
+  //     if(pw==accDetails[accno]["pw"]){
+  //       if(accDetails[accno]["balance"]>amt){
+  //       accDetails[accno]["balance"]-=amt
+
+  //       accDetails[accno].transaction.push({
+  //         amount:amt,
+  //         type:"DEBIT"
+  //       })
+
+  //       this.saveDetails()
+  //       return accDetails[accno]["balance"]
+  //       }else{
+  //         alert("Insufficient balance")
+  //       }
+  //     }
+  //     else{
+  //       alert("invalid pw")
+  //       return false
+  //     }
+
+  //   }
+  //   else{
+  //     alert("invalid accno")
+  //     return false
+  //   }
+  // }
+deleteAcc(accno:any){
+  return this.http.delete("http://localhost:3000/deleteAcc/"+accno,options)
+}
 }
